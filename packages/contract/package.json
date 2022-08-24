@@ -7,7 +7,8 @@
     "test": "./node_modules/.bin/hardhat --network localhost test",
     "start": "./node_modules/.bin/hardhat node",
     "compile": "./node_modules/.bin/hardhat compile",
-    "deploy": "./node_modules/.bin/hardhat run scripts/deploy.ts"
+    "deploy:factory": "./node_modules/.bin/hardhat run scripts/deployFactory.ts",
+    "deploy:nft": "./node_modules/.bin/hardhat run scripts/deployNft.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",

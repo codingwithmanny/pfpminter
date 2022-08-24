@@ -35,8 +35,8 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
     ) {
         _name = name_;
         _symbol = symbol_;
-        holder = holder_;
         baseURI = baseURI_;
+        holder = holder_;
         _mint(holder, 1); // Only tokenId which can be minted
     }
 
