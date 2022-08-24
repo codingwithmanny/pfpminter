@@ -200,7 +200,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("balanceOf - Should revert with ZeroAddressError", async () => {
+  it("balanceOf - Should revert with ZeroAddressError", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -220,7 +220,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("balanceOf - Should return 0 with OWNER_ADDRESS", async () => {
+  it("balanceOf - Should return 0 with OWNER_ADDRESS", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -238,7 +238,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Success
    */
-  it.skip("balanceOf - Should return 0 with RANDOM_ADDRESS", async () => {
+  it("balanceOf - Should return 0 with RANDOM_ADDRESS", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -256,7 +256,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("ownerOf - Should return address 0x0 with 0", async () => {
+  it("ownerOf - Should return address 0x0 with 0", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -274,7 +274,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("ownerOf - Should return address 0x0 with 2", async () => {
+  it("ownerOf - Should return address 0x0 with 2", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -310,7 +310,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("transferFrom - Should revert with NotApprovedOrOwner", async () => {
+  it("transferFrom - Should revert with NotApprovedOrOwner", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -330,7 +330,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("approve - Should revert with NotApprovedOrOwner", async () => {
+  it("approve - Should revert with NotApprovedOrOwner", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -350,7 +350,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("setApprovalForAll - Should revert with NotApprovedOrOwner", async () => {
+  it("setApprovalForAll - Should revert with NotApprovedOrOwner", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -370,7 +370,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("getApproved - Should revert with NonExistentToken", async () => {
+  it("getApproved - Should revert with NonExistentToken", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -408,7 +408,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("isApprovedForAll - Should revert with NotApprovedOrOwner", async () => {
+  it("isApprovedForAll - Should revert with NotApprovedOrOwner", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -464,7 +464,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Failure
    */
-  it.skip("tokenURI - Should revert with NonExistentToken with 0", async () => {
+  it("tokenURI - Should revert with NonExistentToken with 0", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
@@ -484,7 +484,7 @@ describe(`${CONTRACT_NAME} - Contract Tests`, () => {
   /**
    * Success
    */
-  it.skip("tokenURI - Should return baseURI", async () => {
+  it("tokenURI - Should return baseURI", async () => {
     // Setup
     const deployed = await (await setupContract()).deployed();
     const contract = await setupContactProvider(
