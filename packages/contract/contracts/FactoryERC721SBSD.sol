@@ -12,7 +12,7 @@ contract FactoryERC721SBSD {
         string memory symbol_, 
         string memory baseURI_,
         address holder_
-        ) public payable {
+        ) external {
         ERC721SBSD erc721sbsd = new ERC721SBSD(name_, symbol_, baseURI_, holder_);
         emit NewERC721SBSD(name_, symbol_, holder_, address(erc721sbsd));
     }
