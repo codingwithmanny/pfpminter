@@ -14,7 +14,6 @@ contract ERC721SBSD {
     );
     event Update(
         address indexed _owner,
-        uint256 indexed _tokenId,
         string indexed key,
         string indexed value
     );
@@ -84,7 +83,7 @@ contract ERC721SBSD {
     function _updateBaseURI(string memory baseURI_) internal virtual {
         if (holder != msg.sender) revert NotApprovedOrOwner();
         baseURI = baseURI_;
-        emit Update(msg.sender, 1, "baseURI", baseURI_);
+        emit Update(msg.sender, "baseURI", baseURI_);
     }
 
     /**
@@ -95,10 +94,10 @@ contract ERC721SBSD {
         string memory symbol_
     ) internal virtual {
         if (holder != msg.sender) revert NotApprovedOrOwner();
-        name = name_;
-        symbol = symbol_;
-        emit Update(msg.sender, 1, "_name", name_);
-        emit Update(msg.sender, 1, "_symbol", symbol_);
+        _name = name_;
+        _symbol = symbol_;
+        emit Update(msg.sender, "_name", name_);
+        emit Update(msg.sender, "_symbol", symbol_);
     }
 
     /**
@@ -119,7 +118,7 @@ contract ERC721SBSD {
      * @dev Public update function for updating the graphics location
      */
     function updateBaseURI(string memory baseURI_) public virtual {
-        _update(baseURI_);
+        _updateBaseURI(baseURI_);
     }
 
     /**
@@ -129,7 +128,7 @@ contract ERC721SBSD {
         string memory name_,
         string memory symbol_
     ) public virtual {
-        _updateNameSymbol(baseURI_);
+        _updateNameSymbol(name_, symbol_);
     }
 
     // =============================================================
