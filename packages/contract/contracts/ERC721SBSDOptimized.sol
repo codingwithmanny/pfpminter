@@ -12,6 +12,12 @@ contract ERC721SBSD {
         address indexed _to,
         uint256 indexed _tokenId
     );
+    event Update(
+        address indexed _owner,
+        uint256 indexed _tokenId,
+        string indexed key,
+        string indexed value
+    );
     event Approval(
         address indexed _owner,
         address indexed _approved,
@@ -73,6 +79,29 @@ contract ERC721SBSD {
     }
 
     /**
+     * @dev Allows for updating base URI
+     */
+    function _updateBaseURI(string memory baseURI_) internal virtual {
+        if (holder != msg.sender) revert NotApprovedOrOwner();
+        baseURI = baseURI_;
+        emit Update(msg.sender, 1, "baseURI", baseURI_);
+    }
+
+    /**
+     * @dev Allows for updating name and symbol
+     */
+    function _updateNameSymbol(
+        string memory name_,
+        string memory symbol_
+    ) internal virtual {
+        if (holder != msg.sender) revert NotApprovedOrOwner();
+        name = name_;
+        symbol = symbol_;
+        emit Update(msg.sender, 1, "_name", name_);
+        emit Update(msg.sender, 1, "_symbol", symbol_);
+    }
+
+    /**
      * @dev Only allows one token to exist.
      */
     function _exists(uint256 tokenId) internal view virtual returns (bool) {
@@ -84,6 +113,23 @@ contract ERC721SBSD {
      */
     function burn(uint256 tokenId) public virtual {
         _burn(tokenId);
+    }
+
+    /**
+     * @dev Public update function for updating the graphics location
+     */
+    function updateBaseURI(string memory baseURI_) public virtual {
+        _update(baseURI_);
+    }
+
+    /**
+     * @dev Public update function for updating name and symbol
+     */
+    function updateNameSymbol(
+        string memory name_,
+        string memory symbol_
+    ) public virtual {
+        _updateNameSymbol(baseURI_);
     }
 
     // =============================================================
