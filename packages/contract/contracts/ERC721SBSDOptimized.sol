@@ -1,16 +1,28 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-// Imports
-import "./ERC165.sol";
-import "./IERC721.sol";
-import "./IERC721Metadata.sol";
-
 // Contract
 /**
  * @dev ERC721 Soulbound Signature Drop NFT - Also known as a Non-Transferable One-Of-One NFT
  */
-contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
+contract ERC721SBSD {
+    // Events
+    event Transfer(
+        address indexed _from,
+        address indexed _to,
+        uint256 indexed _tokenId
+    );
+    event Approval(
+        address indexed _owner,
+        address indexed _approved,
+        uint256 indexed _tokenId
+    );
+    event ApprovalForAll(
+        address indexed _owner,
+        address indexed _operator,
+        bool _approved
+    );
+
     // Errors
     error ZeroAddressError();
     error NotApprovedOrOwner();
@@ -80,16 +92,8 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC165-supportsInterface}.
      */
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        virtual
-        override(ERC165, IERC165)
-        returns (bool)
-    {
-        return
-            interfaceId == type(IERC721).interfaceId ||
-            super.supportsInterface(interfaceId);
+    function supportsInterface(bytes4) public view virtual returns (bool) {
+        return true;
     }
 
     // =============================================================
@@ -98,13 +102,7 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC721-balanceOf}.
      */
-    function balanceOf(address owner)
-        public
-        view
-        virtual
-        override
-        returns (uint256)
-    {
+    function balanceOf(address owner) public view virtual returns (uint256) {
         if (owner == address(0)) revert ZeroAddressError();
         return owner == holder ? 1 : 0;
     }
@@ -112,13 +110,7 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC721-ownerOf}.
      */
-    function ownerOf(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (address)
-    {
+    function ownerOf(uint256 tokenId) public view virtual returns (address) {
         return tokenId == 1 ? holder : address(0);
     }
 
@@ -130,56 +122,44 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
         address,
         uint256,
         bytes memory
-    ) public virtual override {
+    ) public virtual {
         revert NotApprovedOrOwner();
     }
 
     /**
      * @dev See {IERC721-safeTransferFrom}.
      */
-    function safeTransferFrom(
-        address,
-        address,
-        uint256
-    ) public virtual override {
+    function safeTransferFrom(address, address, uint256) public virtual {
         revert NotApprovedOrOwner();
     }
 
     /**
      * @dev See {IERC721-transferFrom}.
      */
-    function transferFrom(
-        address,
-        address,
-        uint256
-    ) public virtual override {
+    function transferFrom(address, address, uint256) public virtual {
         revert NotApprovedOrOwner();
     }
 
     /**
      * @dev See {IERC721-approve}.
      */
-    function approve(address, uint256) public virtual override {
+    function approve(address, uint256) public virtual {
         revert NotApprovedOrOwner();
     }
 
     /**
      * @dev See {IERC721-setApprovalForAll}.
      */
-    function setApprovalForAll(address, bool) public virtual override {
+    function setApprovalForAll(address, bool) public virtual {
         revert NotApprovedOrOwner();
     }
 
     /**
      * @dev See {IERC721-getApproved}.
      */
-    function getApproved(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (address)
-    {
+    function getApproved(
+        uint256 tokenId
+    ) public view virtual returns (address) {
         if (!_exists(tokenId)) revert NonExistentToken();
         return holder;
     }
@@ -187,13 +167,10 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC721-isApprovedForAll}.
      */
-    function isApprovedForAll(address, address)
-        public
-        view
-        virtual
-        override
-        returns (bool)
-    {
+    function isApprovedForAll(
+        address,
+        address
+    ) public view virtual returns (bool) {
         revert NotApprovedOrOwner();
     }
 
@@ -217,13 +194,9 @@ contract ERC721SBSD is ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC721Metadata-tokenURI}.
      */
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual returns (string memory) {
         if (!_exists(tokenId)) revert NonExistentToken();
 
         return string(abi.encodePacked(baseURI));
